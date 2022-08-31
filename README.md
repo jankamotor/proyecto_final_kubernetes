@@ -82,6 +82,7 @@ To create the objects run:
 - kubectl create -f app-configmap.yml + ENTER
 
 Verify the creation of pods:
+- kubectl get pods
 
 administrator@minikube:~/proyects/wordpress$ kubectl get pods
 NAME                         READY   STATUS    RESTARTS   AGE
@@ -89,22 +90,19 @@ mysql-7c4d46dbd6-zlxrb       1/1     Running   0          7h10m
 wordpress-7bc7d87c79-4hrff   1/1     Running   0          7h10m
 wordpress-7bc7d87c79-g7hgt   1/1     Running   0          7h10m
 wordpress-7bc7d87c79-zdbgs   1/1     Running   0          7h10m
-administrator@minikube:~/proyects/wordpress$ 
 
 Verification of services:
-
+- kubectl get svc
 administrator@minikube:~/proyects/wordpress$ kubectl get svc
 NAME         TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
 frontend     NodePort    10.106.7.140     <none>        80:32351/TCP   7h13m
 kubernetes   ClusterIP   10.96.0.1        <none>        443/TCP        7h18m
 mysql        ClusterIP   10.110.190.225   <none>        3306/TCP       7h12m
-administrator@minikube:~/proyects/wordpress$ 
   
 Verification of the Url of the application within the cluster:
-
+- minikube service frontend --url
 administrator@minikube:~/proyects/wordpress$ minikube service frontend --url
 http://192.168.49.2:32351
-administrator@minikube:~/proyects/wordpress$ 
   
 Proxy configuration for external access:
 - kubectl port-forward --address 0.0.0.0 service/frontend 8080:80 
